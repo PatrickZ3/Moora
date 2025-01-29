@@ -21,6 +21,7 @@
 <body>
   <h1>Find Grocery Stores Near Me</h1>
   <button id="get-coordinates">Get My Location & Show Stores</button>
+  <input type="text" placeholder="Search...">
   <p id="output"></p>
   <div id="map"></div>
 
@@ -56,9 +57,12 @@
         type: ["grocery_or_supermarket"], // Search for grocery stores
       };
 
+      const allStore = [];
+
       service.nearbySearch(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           results.forEach((place) => {
+            allStore.push(place.name);
             const marker = new google.maps.Marker({
               position: place.geometry.location,
               map,
@@ -87,6 +91,9 @@
               infoWindow.open(map, marker);
             });
           });
+          let s = new Set(allStore);
+          let store =[...s];
+          console.log("store: ", store);
         } else {
           console.error("Places API Error:", status); // Log the exact error
           alert(`An error occurred: ${status}`);
