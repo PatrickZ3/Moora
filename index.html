@@ -52,7 +52,8 @@
           },
         });
       }
-      const allStore = [];
+      let allStore = [];
+      
       // Function to find nearby grocery stores
       function findNearbyGroceryStores(location) {
         const service = new google.maps.places.PlacesService(map);
@@ -94,6 +95,7 @@
                 infoWindow.open(map, marker);
               });
             });
+            console.log("im here")
             let s = new Set(allStore);
             allStore = [...s];
             console.log("store: ", allStore);
@@ -103,6 +105,8 @@
           }
         });
       }
+
+      
 
       // Handle location retrieval and display
       document
